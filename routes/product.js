@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const productModel = require('../model/product')
+const productController = require('../controller/product')
 
 router.prefix('/product')
 
@@ -20,26 +20,7 @@ router.prefix('/product')
 // })
 
 // add
-router.post('/', async function (ctx, next) {
-  
-  const result = await new Promise((resolve, reject)=>{
-    var obj = new productModel(ctx.request.body)
-    obj.createTime = new Date()
-    obj.save(function(err){
-      if(err) {
-        resolve('创建商品失败')
-      }else{
-        resolve('创建商品成功')
-      }
-    })
-
-  })
-  console.log(result)
-
-  ctx.body = {
-    msg:result
-  }
-})
+router.post('/', productController.addProduct)
 // modify
 
 
