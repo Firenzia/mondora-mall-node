@@ -1,10 +1,10 @@
-const productModel = require('../model/product')
+const ProductModel = require('../model/product')
 
 class ProductController{
     static async addProduct(ctx, next){
 
         ctx.body = await new Promise((resolve, reject)=>{
-            var obj = new productModel(ctx.request.body)
+            var obj = new ProductModel(ctx.request.body)
             obj.createTime = new Date()
             obj.save(function(err){
             if(err) {
@@ -20,7 +20,7 @@ class ProductController{
 
     static async queryProductInfo (ctx, next) {
         ctx.body = await new Promise((resolve, reject)=>{
-            productModel.findById(ctx.request.query.product_id, "product_name star likes")
+            ProductModel.findById(ctx.request.query.product_id, "product_name star likes")
             .populate({
               path: 'shop',
               select: 'shop_name description',
@@ -39,7 +39,7 @@ class ProductController{
 
     static async queryProductList (ctx, next) {
         ctx.body = await new Promise((resolve, reject)=>{
-            productModel.find(null, "product_name star likes")
+            ProductModel.find(null, "product_name star likes")
             .populate({
               path: 'shop',
               select: 'shop_name description',

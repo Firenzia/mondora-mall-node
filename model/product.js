@@ -1,3 +1,6 @@
+/**
+ * 产品模型
+ */
 const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
@@ -6,22 +9,20 @@ let productSchema = new mongoose.Schema({
     shop: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop'},  
 
     //价格
-    price: Number,    
+    price: {type: Number, required:true},    
 
     // 折扣
-    discount: Number,  
+    discount: {type: Number, default:10},  
 
-    // 分类
-    category_id: Number,  
+    // 分类 1 百货 2 食物 3 配饰
+    category: {type: Number, required: true},  
 
     // 库存
     stock:{ type: Number, default: 0 },    
-
-    // 评分
-    star: { type: Number, default: 0 },     
     
-    // 状态：出售中 待出售  已下架
-    status:String,      
+    // 状态：1 待出售 2 出售中  3已下架
+    status:{ type: Number, default: 1 },      
+
     // 点赞数
     likes:{ type: Number, default: 0 },       
   
@@ -32,13 +33,13 @@ let productSchema = new mongoose.Schema({
     return_count:{ type: Number, default: 0 }, 
 
      // 产品名称
-    product_name: String,  
+    product_name: {type: String, required:true, validate: /\S+/ },  
     
      // 产品描述
-    description: String,  
+    description: {type: String, required:true, validate: /\S+/ }, 
     
      // 图片链接
-    img_url: Array,         
+    img_url: [{type:String}],         
 
     // 更新时间
     update_time: { type: Date, default: Date.now },
@@ -46,13 +47,9 @@ let productSchema = new mongoose.Schema({
     // 创建时间
     create_time: { type: Date, default: Date.now },
 
-    // 删除标记
+    // 删除标记 用户删除时候变成0
     is_active:{ type: Number, default:1}
 })
-
-
-var productModel = mongoose.model('Product', productSchema)
-
 
 
 autoIncrement.initialize(mongoose.connection)
@@ -64,5 +61,5 @@ productSchema.plugin(autoIncrement.plugin, {
 	incrementBy: 1,
 });
 
-
-module.exports = productModel
+var ProductModel = mongoose.model('Product', productSchema)
+module.exports = ProductModel

@@ -1,0 +1,29 @@
+新增产品post   localhost:3000/product
+
+{
+	"shop":"5ce2c8ddf0792d7758f75b80",
+	"price":"188",
+	"category":"1",
+	"description":"This is a good product",
+	"product_name":"apple red",
+	"img_url":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558182407645&di=c0141379751dfa6adcb1682850210a79&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F14%2F28%2F59ae2ed4cb675_610.jpg"
+}
+
+查询产品列表 get  localhost:3000/product/list
+
+
+查询产品  get  localhost:3000/product?product_id=5ce40f4915bf72b7889cf7a1   
+
+新增店铺  post   localhost:3000/shop
+
+// 导出单个collection json
+mongoexport -d test -c products -o ./file/products.json 
+mongoimport -d test -c dress --file ./file/products.json
+
+// 备份
+mongodump -h 127.0.0.1:27017 -d test -o ./dbdata/   会在dbdata下生成一个test文件夹
+mongodump -h <hostname>:<port> -d <dbname> -o <dbdirectory>
+
+// 恢复
+mongorestore -h 127.0.0.1:27017 -d test ./dbdata/test/
+mongorestore -h <hostname>:<port> -d <dbname> <dbdirectory>

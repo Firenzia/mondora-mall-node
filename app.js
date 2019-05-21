@@ -7,8 +7,15 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+const session = require('koa-generic-session')
+const Redis = require('koa-redis')
+const passport = require('./config/passport')
+
 
 const route = require('./routes/index')
+
+app.use(session({key: 'mt', prefix: 'mt:uid', store: new Redis()}))
+
 
 // error handler
 onerror(app)
@@ -17,6 +24,10 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))

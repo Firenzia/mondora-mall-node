@@ -1,3 +1,6 @@
+/**
+ * 店铺模型
+ */
 const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
@@ -30,6 +33,6 @@ shopSchema.plugin(autoIncrement.plugin, {
   	incrementBy: 1,
   });
 
-var shopModel = mongoose.model('Shop', shopSchema)
+var ShopModel = mongoose.model('Shop', shopSchema)
 
-module.exports = shopModel
+module.exports = ShopModel
