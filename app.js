@@ -7,10 +7,8 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-// const index = require('./routes/index')
-// const users = require('./routes/users')
-// const product = require('./routes/product')
-const route = require('./routes/test')
+
+const route = require('./routes/index')
 
 // error handler
 onerror(app)

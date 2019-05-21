@@ -11,6 +11,12 @@ let commentSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+var commentModel = mongoose.model('Comment', commentSchema)
+
+
+
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 commentSchema.plugin(autoIncrement.plugin, {
 	model: 'Comment',
@@ -18,8 +24,5 @@ commentSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var commentModel = mongoose.model('Comment', commentSchema)
-
 
 module.exports = commentModel

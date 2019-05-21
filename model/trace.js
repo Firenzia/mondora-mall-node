@@ -9,6 +9,9 @@ let userTraceSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+var userTraceModel = mongoose.model('Trace', userTraceSchema)
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 userTraceSchema.plugin(autoIncrement.plugin, {
 	model: 'Trace',
@@ -16,8 +19,5 @@ userTraceSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var userTraceModel = mongoose.model('Trace', userTraceSchema)
-
 
 module.exports = userTraceModel

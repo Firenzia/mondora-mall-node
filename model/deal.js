@@ -13,6 +13,12 @@ let dealSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+
+var dealModel = mongoose.model('Deal', dealSchema)
+
+
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 dealSchema.plugin(autoIncrement.plugin, {
 	model: 'Deal',
@@ -20,8 +26,6 @@ dealSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var dealModel = mongoose.model('Deal', dealSchema)
 
 
 module.exports = dealModel

@@ -15,7 +15,7 @@ let productSchema = new mongoose.Schema({
     stock:{ type: Number, default: 0 }, 
     
     //店铺id
-    storeId: Number,       
+    shop_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop'},       
 
     // 评分
     star: { type: Number, default: 0 },     
@@ -47,6 +47,12 @@ let productSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+
+var productModel = mongoose.model('Product', productSchema)
+
+
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 productSchema.plugin(autoIncrement.plugin, {
 	model: 'Product',
@@ -54,8 +60,6 @@ productSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var productModel = mongoose.model('Product', productSchema)
 
 
 module.exports = productModel

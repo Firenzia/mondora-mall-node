@@ -15,6 +15,9 @@ let userSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+var userModel = mongoose.model('User', userSchema)
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 userSchema.plugin(autoIncrement.plugin, {
 	model: 'User',
@@ -22,8 +25,5 @@ userSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var userModel = mongoose.model('User', userSchema)
-
 
 module.exports = userModel

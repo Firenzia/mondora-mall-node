@@ -14,6 +14,13 @@ let sellerSchema = new mongoose.Schema({
     create_time: { type: Date, default: Date.now }
 })
 
+
+
+var sellerModel = mongoose.model('Seller', sellerSchema)
+
+
+
+autoIncrement.initialize(mongoose.connection)
 // 自增 ID 插件配置
 sellerSchema.plugin(autoIncrement.plugin, {
 	model: 'Seller',
@@ -21,8 +28,5 @@ sellerSchema.plugin(autoIncrement.plugin, {
 	startAt: 1,
 	incrementBy: 1,
 });
-
-var sellerModel = mongoose.model('Seller', sellerSchema)
-
 
 module.exports = sellerModel
