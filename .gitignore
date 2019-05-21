@@ -1,7 +1,6 @@
 node_modules/
 .cache/
 dist/
-note/
 test/
 
 package-lock.json
