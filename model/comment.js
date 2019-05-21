@@ -2,13 +2,23 @@ const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
 let commentSchema = new mongoose.Schema({
-    user_id: Number,    
+    //  关联买家
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+
+     //  关联产品
+     product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+     
+    // 评论内容
     content: String,
-    product_id: Number,
+    
+    // 星级
     star: Number,
 
-    update_time: { type: Date},
-    create_time: { type: Date, default: Date.now }
+   // 更新时间
+   update_time: { type: Date, default: Date.now},
+
+   // 创建时间
+   create_time: { type: Date, default: Date.now }
 })
 
 var commentModel = mongoose.model('Comment', commentSchema)

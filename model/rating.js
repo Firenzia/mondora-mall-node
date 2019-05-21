@@ -3,12 +3,22 @@ const autoIncrement = require('mongoose-auto-increment');
 
 //每个用户有一条购物车记录，只做更新不增加
 let ratingSchema = new mongoose.Schema({
-    user_id: Number,    
-    product_id: Number,
-    rating: Number,
+    //  关联买家
+     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, 
+
+    //  关联产品
+     product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
 
     // 订单号 
-    trade_no: Number,  
+    trade_no: { type: mongoose.Schema.Types.ObjectId, ref: 'Deal'},
+
+    //  评分
+    rating: Number,
+    
+    // 更新时间
+    update_time: { type: Date, default: Date.now },
+
+    // 创建时间
     create_time: { type: Date, default: Date.now }
 })
 

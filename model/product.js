@@ -2,6 +2,9 @@ const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
 let productSchema = new mongoose.Schema({
+    // 关联店铺
+    shop: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop'},  
+
     //价格
     price: Number,    
 
@@ -12,10 +15,7 @@ let productSchema = new mongoose.Schema({
     category_id: Number,  
 
     // 库存
-    stock:{ type: Number, default: 0 }, 
-    
-    //店铺id
-    shop_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop'},       
+    stock:{ type: Number, default: 0 },    
 
     // 评分
     star: { type: Number, default: 0 },     
@@ -26,10 +26,10 @@ let productSchema = new mongoose.Schema({
     likes:{ type: Number, default: 0 },       
   
      // 成功交易数
-    deal_count:Number,  
+    deal_count:{ type: Number, default: 0 }, 
     
     // 退货数  
-    return_count:Number,    
+    return_count:{ type: Number, default: 0 }, 
 
      // 产品名称
     product_name: String,  
@@ -41,10 +41,13 @@ let productSchema = new mongoose.Schema({
     img_url: Array,         
 
     // 更新时间
-    update_time: { type: Date},
+    update_time: { type: Date, default: Date.now },
 
     // 创建时间
-    create_time: { type: Date, default: Date.now }
+    create_time: { type: Date, default: Date.now },
+
+    // 删除标记
+    is_active:{ type: Number, default:1}
 })
 
 

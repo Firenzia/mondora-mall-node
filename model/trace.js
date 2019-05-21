@@ -2,10 +2,19 @@ const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
 let userTraceSchema = new mongoose.Schema({
-    user_id:{ type: Number, default: 0 },
-    action_type: Number,
-    related_product_id: { type: Number, default: 0 },
+    //  关联买家
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 
+    // 行为
+    action_type: Number,
+    
+    //  关联产品
+    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+
+    // 更新时间
+    update_time: { type: Date, default: Date.now },
+
+    // 创建时间
     create_time: { type: Date, default: Date.now }
 })
 

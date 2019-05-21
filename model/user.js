@@ -3,15 +3,34 @@ const autoIncrement = require('mongoose-auto-increment');
 
 
 let userSchema = new mongoose.Schema({ 
+    // 昵称   
     nickname: String,
-    password: String,  // 加密
+
+    // 加密密码
+    password: String,  
+
+    // 邮箱
     email: String,
-    avatar_url: String, // 七牛云
+
+    // 七牛云
+    avatar_url: String, 
+
+    // 性别
     gender: Boolean,
+
+    // 生日
     birthday: Date,
+
+    // 星座
     constallation: String,
-    address: Array,  // 多个地址
+
+    // 地址
+    address: [{type:String}],  // 多个地址
  
+    // 更新时间
+    update_time: { type: Date, default: Date.now},
+
+   // 创建时间
     create_time: { type: Date, default: Date.now }
 })
 

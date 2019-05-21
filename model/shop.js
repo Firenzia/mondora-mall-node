@@ -1,12 +1,20 @@
 const  mongoose  = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
-let shopSchema = new mongoose.Schema({
-    seller_id: Number,    
+let shopSchema = new mongoose.Schema({ 
+    //  关联卖家
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller'},   
+    
+    // 店铺名称
     shop_name: String,
-    description: String , 
 
-    update_time: { type: Date},
+    // 店铺描述
+    description: String , 
+    
+    // 更新时间
+    update_time: { type: Date, default: Date.now},
+
+    // 创建时间
     create_time: { type: Date, default: Date.now }
 })
 
