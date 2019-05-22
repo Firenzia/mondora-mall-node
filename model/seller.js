@@ -3,7 +3,7 @@ const autoIncrement = require('mongoose-auto-increment');
 
 let sellerSchema = new mongoose.Schema({
     // 昵称   
-    nickname: String,
+    username: String,
 
     // 加密密码
     password: String,  

@@ -7,34 +7,57 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const session = require('koa-generic-session')
+// const session = require('koa-generic-session')
+const session = require('koa-session')
 const Redis = require('koa-redis')
 const passport = require('./config/passport')
 
-
 const route = require('./routes/index')
-
-app.use(session({key: 'mt', prefix: 'mt:uid', store: new Redis()}))
-
 
 // error handler
 onerror(app)
 
+
+app.keys= ['mondora','mall']
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+
+const conf={
+  encode:json=>JSON.stringify(json),
+  decode:str=>JSON.parse(str),
+  key: 'mondora', prefix: 'mondora:uid'
+}
+app.use(
+  session(
+    conf,
+    app
+  )
+)
+// app.use(session({key: 'mondora', prefix: 'mondora:uid', store: new Redis()}))
 
 app.use(json())
-app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-  extension: 'pug'
-}))
+app.use(passport.initialize())
+ // 会在请求周期ctx对象挂载以下方法与属性
+
+  //   ctx.state.user 认证用户
+  //   ctx.login(user) 登录用户（序列化用户）
+  //   ctx.isAuthenticated() 判断是否认证
+
+  // 这里序列化指的是把用户对象存到session里，反序列化就是反过来，从session里取用户数据成对象
+
+app.use(passport.session())
+
+
+app.use(logger())
+// app.use(require('koa-static')(__dirname + '/public'))
+
+// app.use(views(__dirname + '/views', {
+//   extension: 'pug'
+// }))
 
 // logger
 app.use(async (ctx, next) => {

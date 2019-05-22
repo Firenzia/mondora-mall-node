@@ -9,7 +9,7 @@
 	"img_url":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558182407645&di=c0141379751dfa6adcb1682850210a79&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F14%2F28%2F59ae2ed4cb675_610.jpg"
 }
 
-查询产品列表 get  localhost:3000/product/list
+查询产品列表 get  localhost:3000/product/list 
 
 
 查询产品  get  localhost:3000/product?product_id=5ce40f4915bf72b7889cf7a1   

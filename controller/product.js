@@ -5,7 +5,7 @@ class ProductController{
 
         ctx.body = await new Promise((resolve, reject)=>{
             var obj = new ProductModel(ctx.request.body)
-            obj.createTime = new Date()
+
             obj.save(function(err){
             if(err) {
                 console.log('err', err)
@@ -38,6 +38,8 @@ class ProductController{
     }
 
     static async queryProductList (ctx, next) {
+        console.log('session', ctx.session) 
+        // console.log(ctx.session.passport.user)  // { uid: '5ce4c1865a5cfa9e96e59c0e' }
         ctx.body = await new Promise((resolve, reject)=>{
             ProductModel.find(null, "product_name star likes")
             .populate({
