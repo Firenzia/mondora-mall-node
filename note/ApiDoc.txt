@@ -1,3 +1,13 @@
+// 接口格式
+{
+  code: 0 // 非正常结果
+  msg：""
+}
+{  
+  code:1,   // 正常结果
+  data:""
+}
+
 新增产品post   localhost:3000/product
 
 {

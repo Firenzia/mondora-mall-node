@@ -9,12 +9,12 @@ router.get('/', function (ctx, next) {
 
 // query
 router.get('/list', async function (ctx, next) {
-  
-  const result = await new Promise((resolve, reject)=>{
-    student.find({}, function(err, student){
-        if(student){
-          resolve(student)
-        }
+
+  const result = await new Promise((resolve, reject) => {
+    student.find({}, function (err, student) {
+      if (student) {
+        resolve(student)
+      }
     })
   })
 
@@ -25,13 +25,13 @@ router.get('/list', async function (ctx, next) {
 
 // add
 router.post('/', async function (ctx, next) {
-  
-  const result = await new Promise((resolve, reject)=>{
+
+  const result = await new Promise((resolve, reject) => {
     var obj = new student(ctx.request.body)
-    obj.save(function(err){
-      if(err) {
+    obj.save(function (err) {
+      if (err) {
         resolve('创建失败')
-      }else{
+      } else {
         resolve('创建成功')
       }
     })
@@ -40,7 +40,7 @@ router.post('/', async function (ctx, next) {
   console.log(result)
 
   ctx.body = {
-    msg:result
+    msg: result
   }
 })
 // modify

@@ -3,7 +3,8 @@ const UserController = require('../controller/user')
 
 router.prefix('/user')
 
-
+// 检验是否登陆态
+router.get('/auth', UserController.auth)
 
 // 登录
 router.post('/login', UserController.login)

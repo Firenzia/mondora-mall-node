@@ -5,11 +5,11 @@ const ProductController = require('../controller/product')
 router.prefix('/product')
 
 // query 关联查询
-router.get('/list',  ProductController.queryProductList)
+router.get('/list', ProductController.queryProductList)
 
 
 // query 关联查询
-router.get('/',  ProductController.queryProductInfo)
+router.get('/', ProductController.queryProductInfo)
 
 // add
 router.post('/', ProductController.addProduct)

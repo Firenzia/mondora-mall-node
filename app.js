@@ -18,17 +18,18 @@ const route = require('./routes/index')
 onerror(app)
 
 
-app.keys= ['mondora','mall']
+app.keys = ['mondora', 'mall']
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes: ['json', 'form', 'text']
 }))
 
 
-const conf={
-  encode:json=>JSON.stringify(json),
-  decode:str=>JSON.parse(str),
-  key: 'mondora', prefix: 'mondora:uid'
+const conf = {
+  encode: json => JSON.stringify(json),
+  decode: str => JSON.parse(str),
+  key: 'mondora',
+  prefix: 'mondora:uid'
 }
 app.use(
   session(
@@ -41,13 +42,13 @@ app.use(
 app.use(json())
 
 app.use(passport.initialize())
- // 会在请求周期ctx对象挂载以下方法与属性
+// 会在请求周期ctx对象挂载以下方法与属性
 
-  //   ctx.state.user 认证用户
-  //   ctx.login(user) 登录用户（序列化用户）
-  //   ctx.isAuthenticated() 判断是否认证
+//   ctx.state.user 认证用户
+//   ctx.login(user) 登录用户（序列化用户）
+//   ctx.isAuthenticated() 判断是否认证
 
-  // 这里序列化指的是把用户对象存到session里，反序列化就是反过来，从session里取用户数据成对象
+// 这里序列化指的是把用户对象存到session里，反序列化就是反过来，从session里取用户数据成对象
 
 app.use(passport.session())
 
