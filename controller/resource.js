@@ -22,7 +22,9 @@ class ResourceController {
       if (uploadToken) {
         ctx.body = {
           code: 1,
-          data:{uploadToken}
+          data: {
+            uploadToken
+          }
         }
       } else {
         ctx.body = {

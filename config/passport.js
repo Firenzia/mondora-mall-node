@@ -59,9 +59,11 @@ passport.serializeUser(async function (user, done) {
     let result = await ShopModel.findOne({
       seller: user._id
     })
-    Object.assign(cookie, {
-      sid: result._id
-    })
+    if (result) {
+      Object.assign(cookie, {
+        sid: result._id
+      })
+    }
     console.log(cookie)
   } else {
     console.log('买家登录')

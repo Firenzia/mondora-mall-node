@@ -13,10 +13,12 @@ class ProductController {
         if (err) {
           console.log('err', err)
           resolve({
+            code: 0,
             msg: '创建商品失败'
           })
         } else {
           resolve({
+            code: 1,
             msg: '创建商品成功'
           })
         }
@@ -27,19 +29,22 @@ class ProductController {
 
   static async queryProductInfo(ctx, next) {
     ctx.body = await new Promise((resolve, reject) => {
-      ProductModel.findById(ctx.request.query.product_id, "product_name star likes")
+      ProductModel.findById(ctx.request.query.product_id)
         .populate({
-          path: 'shop',
-          select: 'shop_name description',
+          path: 'shop'
         }).exec(function (err, product) {
           if (product) {
             resolve({
-              result: product
+              code: 1,
+              data: product
             })
           }
           if (err) {
             console.log('err')
-            resolve(err)
+            resolve({
+              code: 0,
+              msg: err
+            })
           }
         })
     })
@@ -49,7 +54,7 @@ class ProductController {
     console.log('session', ctx.session)
     // console.log(ctx.session.passport.user)  // { uid: '5ce4c1865a5cfa9e96e59c0e' }
     ctx.body = await new Promise((resolve, reject) => {
-      ProductModel.find(null, "product_name star likes")
+      ProductModel.find(null, "product_name description price img_url")
         .populate({
           path: 'shop',
           select: 'shop_name description',
@@ -57,12 +62,18 @@ class ProductController {
           //   console.log(productList) 
           if (productList) {
             resolve({
-              result: productList
+              code: 1,
+              data: {
+                productList
+              }
             })
           }
           if (err) {
             console.log('err')
-            resolve(err)
+            resolve({
+              code: 0,
+              msg: err
+            })
           }
         })
     })
