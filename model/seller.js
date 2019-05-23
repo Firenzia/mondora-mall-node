@@ -2,6 +2,7 @@ const mongoose = require('../db/config.js');
 const autoIncrement = require('mongoose-auto-increment');
 
 let sellerSchema = new mongoose.Schema({
+
   // 昵称   
   username: String,
 
@@ -19,6 +20,12 @@ let sellerSchema = new mongoose.Schema({
 
   // 发货地址
   shippment_address: String,
+
+  // 账号类型
+  account_type: {
+    type: Number,
+    default: 2
+  },
 
   // 更新时间
   update_time: {

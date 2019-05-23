@@ -29,6 +29,12 @@ let userSchema = new mongoose.Schema({
     type: String
   }], // 多个地址
 
+  // 账号类型
+  account_type: {
+    type: Number,
+    default: 1
+  },
+
   // 更新时间
   update_time: {
     type: Date,

@@ -4,7 +4,10 @@ class ProductController {
   static async addProduct(ctx, next) {
 
     ctx.body = await new Promise((resolve, reject) => {
-      var obj = new ProductModel(ctx.request.body)
+      let data = Object.assign(ctx.request.body, {
+        shop: ctx.session.passport.user.sid
+      })
+      var obj = new ProductModel(data)
 
       obj.save(function (err) {
         if (err) {
@@ -29,7 +32,6 @@ class ProductController {
           path: 'shop',
           select: 'shop_name description',
         }).exec(function (err, product) {
-          console.log(product)
           if (product) {
             resolve({
               result: product
