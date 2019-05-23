@@ -5,15 +5,6 @@ const request = require('../config/axios')
 // signup  signin  verify   exit   getUser
 class SellerController {
   static async auth(ctx, next) {
-
-    ctx.body = ctx.isAuthenticated() ? {
-      code: 1,
-      msg: "卖家已登陆",
-      username: ''
-    } : {
-      code: 0,
-      msg: "卖家未登陆"
-    }
     console.log('auth is called', ctx.isAuthenticated())
     if (!ctx.isAuthenticated()) {
       ctx.body = {
@@ -30,9 +21,17 @@ class SellerController {
             code: 1,
             msg: '卖家已登陆',
             data: {
-              username: user.username
+              username: user.username,
+              accountType:2 
             }
           })
+        }else{
+          resolve(
+            {
+              code: 0,
+              msg: "卖家未登陆"
+            }
+          )
         }
       })
     })

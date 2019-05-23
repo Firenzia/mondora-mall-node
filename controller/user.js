@@ -6,14 +6,6 @@ const request = require('../config/axios')
 class UserController {
   static async auth(ctx, next) {
 
-    ctx.body = ctx.isAuthenticated() ? {
-      code: 1,
-      msg: "用户已登陆",
-      username: ''
-    } : {
-      code: 0,
-      msg: "用户未登陆"
-    }
     console.log('auth is called', ctx.isAuthenticated())
     if (!ctx.isAuthenticated()) {
       ctx.body = {
@@ -30,8 +22,14 @@ class UserController {
             code: 1,
             msg: '用户已登陆',
             data: {
-              username: user.username
+              username: user.username,
+              accountType: 1
             }
+          })
+        } else {
+          resolve({
+            code: 0,
+            msg: "用户未登陆"
           })
         }
       })
