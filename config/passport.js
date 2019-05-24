@@ -50,7 +50,7 @@ passport.use('seller', new LocalStrategy(async function (username, password, don
 //  序列化ctx.login()触发  serializeUser 在用户登录验证成功以后将会把用户的数据存储到 session 中
 passport.serializeUser(async function (user, done) {
 
-  console.log('serializeUser', user)
+  // console.log('serializeUser', user)
   let cookie = {
     uid: user._id
   }
@@ -59,16 +59,17 @@ passport.serializeUser(async function (user, done) {
     let result = await ShopModel.findOne({
       seller: user._id
     })
-    console.log('卖家登录 uid',user._id, '店铺', result) // 如果登录的是卖家，session 存卖家id 和店铺id
+    // console.log('卖家登录 uid',user._id, '店铺', result) // 如果登录的是卖家，session 存卖家id 和店铺id
     if (result) {
       Object.assign(cookie, {
         sid: result._id
       })
     }
-    console.log(cookie)
-  } else {
+    console.log('卖家登录')
+  } else { 
     console.log('买家登录')
   }
+  console.log('cookie', cookie)
   // 返回给客户端的set-cookie
   done(null, cookie)
 })

@@ -50,9 +50,19 @@ class ProductController {
     })
   }
 
+  static async queryShopProductList(ctx, next) {
+    let result = await ProductModel.find({shop:ctx.session.passport.user.sid })
+      ctx.body =  {
+        code: 1,
+        data: {
+          productList: result || []
+        }
+      }
+  }
+
   static async queryProductList(ctx, next) {
-    console.log('session', ctx.session)
     // console.log(ctx.session.passport.user)  // { uid: '5ce4c1865a5cfa9e96e59c0e' }
+
     ctx.body = await new Promise((resolve, reject) => {
       ProductModel.find(null, "product_name description price img_url")
         .populate({

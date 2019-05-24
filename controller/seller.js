@@ -60,9 +60,11 @@ class SellerController {
       }
       //  场景3 卖家不存在 创建卖家 再调用登录接口 
       if (info === 'seller_not_exist') {
+        let newSeller
         ctx.body = await new Promise((resolve) => {
           new SellerModel(ctx.request.body).save().then(user => {
             if (user) {
+              newSeller = user
               request.post('/seller/login', ctx.request.body).then(result => {
                 if (result.data.code === 1) {
                   resolve({
@@ -87,6 +89,7 @@ class SellerController {
             }
           })
         })
+        return ctx.login(newSeller)
       }
 
       // 场景4 验证异常

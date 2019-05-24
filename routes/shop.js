@@ -7,7 +7,11 @@ router.prefix('/shop')
 // add
 router.post('/', ShopController.addShop)
 
-// delete
+//  query
+router.get('/info', ShopController.queryShopInfo)
+
+// update
+router.put('/info', ShopController.updateShopInfo)
 
 
 module.exports = router

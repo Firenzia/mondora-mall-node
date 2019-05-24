@@ -57,9 +57,11 @@ class UserController {
       }
       //  场景3 用户不存在 创建用户 再调用登录接口 
       if (info === 'user_not_exist') {
+        let newUser
         ctx.body = await new Promise((resolve) => {
           new UserModel(ctx.request.body).save().then(user => {
             if (user) {
+              newUser = user
               request.post('/user/login', ctx.request.body).then(result => {
                 if (result.data.code === 1) {
                   resolve({
@@ -84,6 +86,8 @@ class UserController {
             }
           })
         })
+
+        return ctx.login(newUser)
       }
 
       // 场景4 验证异常
