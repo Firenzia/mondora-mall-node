@@ -55,10 +55,11 @@ passport.serializeUser(async function (user, done) {
     uid: user._id
   }
   if (user.account_type === 2) {
-    console.log('卖家登录') // 如果登录的是卖家，session 存卖家id 和店铺id
+ 
     let result = await ShopModel.findOne({
       seller: user._id
     })
+    console.log('卖家登录 uid',user._id, '店铺', result) // 如果登录的是卖家，session 存卖家id 和店铺id
     if (result) {
       Object.assign(cookie, {
         sid: result._id
