@@ -37,3 +37,13 @@ mongodump -h <hostname>:<port> -d <dbname> -o <dbdirectory>
 // 恢复
 mongorestore -h 127.0.0.1:27017 -d test ./dbdata/test/
 mongorestore -h <hostname>:<port> -d <dbname> <dbdirectory>
+
+// 创建购物车
+http://localhost:3000/cart
+{
+	"user":"5ce60cc5a56396ab688b1e30",
+	"detail":[
+	{"product": "5ce65f2ddebb3c7878f0068f","count":2},
+	{"product": "5ce66ba56551cbb0048d997c","count":4}
+	]
+}

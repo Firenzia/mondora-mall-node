@@ -20,7 +20,7 @@ let cartSchema = new mongoose.Schema({
     }
   }],
 
-  status: Number, // 是否已清空
+  status: Number, // 是否已清空 0 清空
 
   // 更新时间
   update_time: {
