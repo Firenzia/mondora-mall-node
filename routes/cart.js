@@ -10,8 +10,6 @@ router.post('/', CartController.addCart)
 //  query
 router.get('/info', CartController.queryCartInfo)
 
-// update
-router.put('/info', CartController.updateCartInfo)
 
 
 module.exports = router

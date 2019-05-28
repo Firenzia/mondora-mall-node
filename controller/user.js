@@ -43,7 +43,11 @@ class UserController {
       if (user) {
         ctx.body = {
           code: 1,
-          msg: '登录成功'
+          msg: '登录成功',
+          data:{
+            username: user.username,
+            accountType: 1
+          }
         }
         return ctx.login(user)
       }
@@ -66,7 +70,11 @@ class UserController {
                 if (result.data.code === 1) {
                   resolve({
                     code: 1,
-                    msg: '登录成功'
+                    msg: '登录成功',
+                    data:{
+                      username: user.username,
+                      accountType: 1
+                    }
                   })
                 } else {
                   resolve({
