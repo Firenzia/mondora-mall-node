@@ -52,7 +52,9 @@ passport.serializeUser(async function (user, done) {
 
   // console.log('serializeUser', user)
   let cookie = {
-    uid: user._id
+    uid: user._id,
+    username: user.username,
+    account_type: user.account_type
   }
   if (user.account_type === 2) {
  
